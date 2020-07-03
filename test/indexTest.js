@@ -194,6 +194,7 @@ describe("The payroll system", function () {
         updatedBpRecord = createTimeInEvent(cRecord, "0044-03-15 0900")
         updatedBpRecord = createTimeOutEvent(cRecord, "0044-03-15 1100")
         // 324 + 54
+        debugger
         expect(allWagesFor(cRecord)).to.equal(378)
       })
     })
