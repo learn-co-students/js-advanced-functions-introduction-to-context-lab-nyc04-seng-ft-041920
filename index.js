@@ -39,11 +39,11 @@ function createTimeOutEvent(employeeRecordObj, dateStamp){
 }
 
 function hoursWorkedOnDate(employeeRecordObj, date){
-  const timeOutObjArr = employeeRecordObj.timeOutEvents.filter(timeObj => timeObj.date === date)
-  const timeOut = timeOutObjArr[0].hour
+  const timeOutObj = employeeRecordObj.timeOutEvents.find(timeObj => timeObj.date === date)
+  const timeOut = timeOutObj.hour
 
-  const timeInObjArr = employeeRecordObj.timeInEvents.filter(timeObj => timeObj.date === date)
-  const timeIn = timeInObjArr[0].hour
+  const timeInObj = employeeRecordObj.timeInEvents.find(timeObj => timeObj.date === date)
+  const timeIn = timeInObj.hour
 
   return (timeOut - timeIn) / 100
 }
@@ -57,9 +57,7 @@ function allWagesFor(employeeRecordObj){
   // find wagesEarnedOnDate
   const allDates = employeeRecordObj.timeInEvents.map(timeObj => timeObj.date)
   console.log(allDates)
-  const reducer = (sum, currentDate) => sum + wagesEarnedOnDate(employeeRecordObj, currentDate) 
-  console.log("test:", allDates.reduce(reducer))
-  return allDates.reduce(reducer, 0)
+  return allDates.reduce((sum, currentDate) => sum + wagesEarnedOnDate(employeeRecordObj, currentDate), 0)
 }
 
 function calculatePayroll(employeeArr){
@@ -68,5 +66,5 @@ function calculatePayroll(employeeArr){
 }
 
 function findEmployeeByFirstName(employeeArr, firstName){
-  return employeeArr.filter(employee => employee.firstName === firstName)[0]
+  return employeeArr.find(employee => employee.firstName === firstName)
 }
